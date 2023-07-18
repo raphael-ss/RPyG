@@ -4,6 +4,14 @@ import rpg
 
 rpg.title()
 
-player = rpg.start()
+Player = rpg.start()
+answer = rpg.introduction(Player.name, Player.special)
 
-print(player)
+if (answer == 'y'):
+    pass
+
+else:
+    print("Another time then, mate.\n")
+    exit(0)
+
+print(Player)
