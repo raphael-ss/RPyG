@@ -83,19 +83,12 @@ devil = """
 
 def introduction(name, rpg_class):
     intro = """
-\nSo, {name}... This is the start of your journey at RPyG.\n
+So, {name}... This is the start of your journey at RPyG.\n
 Now, I, the ancient Moldan, shall conduct you to your next mission.\n
 For centuries... Our people, the Loeppe's Dwarves, have been tormented with the tirany and wrath of the evil Lediv, the Devil.\n
 Now, in behalf of my name, Moldan, the ancient wise elder in the Loeppe's village, we have contracted you, {name}, to exterminate all the monsters in the area, and, of course, Lediv, the Devil.\n
 """.format(name=name, rpg_class=rpg_class)
-    for letter in intro:
-        if letter == '\n':
-            time.sleep(2.0)
-            print(letter, end="")
-        else:
-            time.sleep(0.2)
-            print(letter, end="")
-
+    print(intro)
     answer = input("Do you accept the mission we presented to you? (y/n) ")
     return answer
 
@@ -162,6 +155,11 @@ def start():
 
     return player
     
+def mission_accepted(name, rpg_class):
+    print("\nAh, yes, that is what I like to hear. We thank you for your help.\n")
+    print("But no more fooling around: let's begin. You have 3 regions to clear from monsters, before facing Lediv, the Devil.\n")
+    print("Exterminating the monsters from those regions will help you gather the strength and ability required to defeat Lediv, the Devil.\n")
+    return
 
 class Player:
     current_weapon = "Skinny Fists"
