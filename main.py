@@ -1,10 +1,12 @@
 import random
 import time
 import rpg
+import os
 
-rpg.title()
+rpg.transition()
 
 Player = rpg.start()
+rpg.transition()
 answer = rpg.introduction(Player.name, Player.special)
 
 if (answer == 'y'):
@@ -13,5 +15,10 @@ if (answer == 'y'):
 else:
     print("Another time then, mate.\n")
     exit(0)
+
+time.sleep(10.0)
+rpg.transition()
+
+rpg.print_menu()
 
 print(Player)

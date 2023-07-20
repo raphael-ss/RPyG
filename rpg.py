@@ -1,5 +1,6 @@
 import time 
 import random as rd
+import os
 devil = """
                          . `  `. .`  ` .
                         . `     `.  ;  .`     ` .
@@ -92,7 +93,8 @@ Now, in behalf of my name, Moldan, the ancient wise elder in the Loeppe's villag
     answer = input("Do you accept the mission we presented to you? (y/n) ")
     return answer
 
-def title():
+def transition():
+    os.system("cls")
     print(" _______ _    _ ______   _____  _____        _____   ")
     time.sleep(0.3)
     print("|__   __| |  | |  ____| |  __ \|  __ \      / ____| ")
@@ -109,6 +111,7 @@ def title():
     time.sleep(0.3)
     print("                                       |___/        ")
     time.sleep(3.0)
+    os.system("cls")
     return
 
 def start():
@@ -156,9 +159,25 @@ def start():
     return player
     
 def mission_accepted(name, rpg_class):
-    print("\nAh, yes, that is what I like to hear. We thank you for your help.\n")
-    print("But no more fooling around: let's begin. You have 3 regions to clear from monsters, before facing Lediv, the Devil.\n")
-    print("Exterminating the monsters from those regions will help you gather the strength and ability required to defeat Lediv, the Devil.\n")
+    print("\nAh, yes, that is what I like to hear. We thank you for your help.")
+    time.sleep(2.5)
+    print("But no more fooling around: let's begin. You have 3 regions to clear from monsters, before facing Lediv, the Devil.")
+    time.sleep(2.5)
+    print("Exterminating the monsters from those regions will help you gather the strength and ability required to defeat Lediv, the Devil.")
+    time.sleep(2.5)
+    print(f"Again: we thank you, {name}, the {rpg_class}. It shall be a tormented path, but surely, it will be for a good cause.")
+    time.sleep(2.5)
+    return
+
+def print_menu():
+    print("""\033[22;32m
+#############################
+# (1) View Status           #
+# (2) Change Current Weapon #
+# (3) Use Potion            #
+# (4) Level Up              #
+# (5) Change Name           #
+#############################""")
     return
 
 class Player:
