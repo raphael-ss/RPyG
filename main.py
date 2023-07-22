@@ -18,7 +18,8 @@ else:
 
 time.sleep(10.0)
 rpg.transition()
-
-rpg.print_menu()
-
 print(Player)
+time.sleep(6.5)
+Monster_1 = rpg.Monster(20)
+print(Monster_1)
+rpg.fight(Player, Monster_1)
