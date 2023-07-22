@@ -197,6 +197,7 @@ class Player:
     current_location = 0
     recharge = 0
     monsters_defeated = 0
+    current_floor = 0
     locations = ["The Loeppe's Village", "The Abandoned Dark Castle", "The Tyran Wizard Dungeon", "Lediv's Lair "]
     def __init__(self, name="Player", rpg_class="peasant"):
         self.level = 0
@@ -210,7 +211,7 @@ class Player:
 
     def initialize(self):
         self.potions["Health Potion (weak)"] = [1, 10]
-        self.current_location = self.locations[0]
+        self.current_location = 0
         if self.special == "peasant":
             self.weapons["Skinny Fists"] = 3
 
@@ -300,7 +301,7 @@ class Player:
 
     def next_location(self):
         self.current_location += 1
-        print("You moved to {location}.\n".format(location=self.locations[self.current_location]))
+        print(f"You left {self.locations[self.current_location-1]} and moved to {self.locations[self.current_location]}.\n")
         
     def reduce_health(self, DP):
         self.hp -= DP
@@ -332,11 +333,21 @@ class Player:
                 print(f"{self.name} dealed {self.weapons[self.current_weapon]} damage points!")
                 return self.weapons[self.current_weapon]
     
+    def next_floor(self):
+        if self.current_floor == 0 or self.current_floor > 3:
+            self.current_floor = 1
+            print("You just entered floor 1.")
+            return
+        else:
+            self.current_floor += 1
+            print(f"You just entered floor {self.current_floor}.")
+            return
 
 
 class Monster:
     monster_names = ["Jirk", "Borl", "Hugat", "Rater", "Nadimr", "Ryat", "Fje", "Laqo", "Zirlq", "Kamr"]
-
+    drop_loot = {"Health Potion (weak)": 10, "Health Potion (weak)": 10, "Health Potion (weak)": 10, "Health Potion (medium)": 20, "Health Potion (medium)": 20,
+                 "Health Potion (medium)": 20, "Health Potion (strong)": 30, "Health Potion (strong)": 30}
     def __init__(self, hp):
         self.hp = hp
         self.name = rd.choice(Monster.monster_names)
@@ -356,11 +367,13 @@ class Monster:
             self.active = 0
 
 
+
+
 def round(Player:Player, Monster:Monster):
     dp = Player.attack()
     Monster.reduce_health(dp)
     if Monster.active: dp_monster = Monster.attack()
-    Player.reduce_health(dp_monster)
+    if Monster.active: Player.reduce_health(dp_monster)
     print("\n+++ Result of Round +++")
     if not Player.dead: print("{name}, the {rpg_class}: {hp} HP left.".format(name=Player.name, rpg_class=Player.special, hp=Player.hp))
     if Monster.active: print("{name}, the Monster: {hp} HP left.\n".format(name=Monster.name, hp=Monster.hp))
@@ -381,3 +394,15 @@ def fight(Player:Player, Monster:Monster):
     else:
         print(f"Unfortunately... {Monster.name} won the fight.")
         exit(0)
+
+def location_0(Player:Player):
+    time.sleep(0.5)
+    print(f"Let's move on to our next location: {Player.locations[Player.current_location+1]}")
+    time.sleep(2.0)
+    print("Over there, you may find monsters to battle with, so be careful.")
+    time.sleep(2.0)
+    print("Usually, each location is divided in 3 floors. That's all I can tell you.")
+    time.sleep(3.5)
+    print("Good Luck.")
+    transition()
+    return

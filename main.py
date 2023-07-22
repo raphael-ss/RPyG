@@ -20,6 +20,11 @@ time.sleep(10.0)
 rpg.transition()
 print(Player)
 time.sleep(6.5)
+
+rpg.location_0(Player)
+Player.next_location()
+Player.next_floor()
+
 Monster_1 = rpg.Monster(20)
 print(Monster_1)
 rpg.fight(Player, Monster_1)
